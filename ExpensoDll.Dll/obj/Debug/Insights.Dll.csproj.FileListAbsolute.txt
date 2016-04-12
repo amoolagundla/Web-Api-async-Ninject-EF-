@@ -1,0 +1,10 @@
+c:\Users\abhinav\Documents\Visual Studio 2015\Projects\Insights\ExpensoDll.Dll\bin\Debug\EntityFramework.dll
+c:\Users\abhinav\Documents\Visual Studio 2015\Projects\Insights\ExpensoDll.Dll\bin\Debug\EntityFramework.SqlServer.dll
+c:\Users\abhinav\Documents\Visual Studio 2015\Projects\Insights\ExpensoDll.Dll\bin\Debug\EntityFramework.xml
+c:\Users\abhinav\Documents\Visual Studio 2015\Projects\Insights\ExpensoDll.Dll\bin\Debug\EntityFramework.SqlServer.xml
+c:\Users\abhinav\Documents\Visual Studio 2015\Projects\Insights\ExpensoDll.Dll\obj\Debug\Insights.Dll.csprojResolveAssemblyReference.cache
+c:\Users\abhinav\Documents\Visual Studio 2015\Projects\Insights\ExpensoDll.Dll\bin\Debug\Insights.Dll.dll.config
+c:\Users\abhinav\Documents\Visual Studio 2015\Projects\Insights\ExpensoDll.Dll\bin\Debug\Insights.Dll.dll
+c:\Users\abhinav\Documents\Visual Studio 2015\Projects\Insights\ExpensoDll.Dll\bin\Debug\Insights.Dll.pdb
+c:\Users\abhinav\Documents\Visual Studio 2015\Projects\Insights\ExpensoDll.Dll\obj\Debug\Insights.Dll.dll
+c:\Users\abhinav\Documents\Visual Studio 2015\Projects\Insights\ExpensoDll.Dll\obj\Debug\Insights.Dll.pdb

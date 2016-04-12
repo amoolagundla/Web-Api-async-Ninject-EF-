@@ -1,0 +1,738 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ExpensoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="individualPurchases">
+          <Key>
+            <PropertyRef Name="iPurchasesId" />
+          </Key>
+          <Property Name="iPurchasesId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="purschaseDesc" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="tripLookUp_tripId" Type="int" Nullable="false" />
+          <Property Name="personId_personId" Type="int" Nullable="false" />
+          <Property Name="purchaseDesc_descId" Type="int" Nullable="false" />
+          <Property Name="purchaseDescMisc" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="transactionId" Type="nvarchar" MaxLength="35" Nullable="false" />
+          <Property Name="amount" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="personId">
+          <Key>
+            <PropertyRef Name="personId" />
+          </Key>
+          <Property Name="personId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="lastName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="emailId" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="phoneNumber" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="purchaseDesc">
+          <Key>
+            <PropertyRef Name="descId" />
+          </Key>
+          <Property Name="descId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="purchaseDesc" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="purchaseExpenses">
+          <Key>
+            <PropertyRef Name="pExpenseId" />
+          </Key>
+          <Property Name="pExpenseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tripLookUp_tripId" Type="int" Nullable="false" />
+          <Property Name="personId_personId" Type="int" Nullable="false" />
+          <Property Name="purchaseDesc_descId" Type="int" Nullable="false" />
+          <Property Name="purchaseAmount" Type="int" Nullable="false" />
+          <Property Name="purcahsedesc" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="enteredDate" Type="datetime" Nullable="false" />
+          <Property Name="transactionId" Type="nchar" MaxLength="100" />
+          <Property Name="purchasedesc" Type="nchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="TripAdvance">
+          <Key>
+            <PropertyRef Name="advanceId" />
+          </Key>
+          <Property Name="advanceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="purchaseDesc" Type="nvarchar" MaxLength="20" />
+          <Property Name="tripLookUp_tripId" Type="int" Nullable="false" />
+          <Property Name="personId_personId" Type="int" Nullable="false" />
+          <Property Name="TripAdvance_advanceId" Type="int" Nullable="false" />
+          <Property Name="enterdDate" Type="int" Nullable="false" />
+          <Property Name="advanceAmount" Type="int" Nullable="false" />
+          <Property Name="transactionId" Type="nvarchar" MaxLength="35" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tripGroup">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tripLookUp_tripId" Type="int" Nullable="false" />
+          <Property Name="personId_personId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tripLookUp">
+          <Key>
+            <PropertyRef Name="tripId" />
+          </Key>
+          <Property Name="tripId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tripDesc" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <Association Name="individualExpenses_personId">
+          <End Role="personId" Type="Self.personId" Multiplicity="1" />
+          <End Role="individualPurchases" Type="Self.individualPurchases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personId">
+              <PropertyRef Name="personId" />
+            </Principal>
+            <Dependent Role="individualPurchases">
+              <PropertyRef Name="personId_personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="individualExpenses_purchaseDesc">
+          <End Role="purchaseDesc" Type="Self.purchaseDesc" Multiplicity="1" />
+          <End Role="individualPurchases" Type="Self.individualPurchases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="purchaseDesc">
+              <PropertyRef Name="descId" />
+            </Principal>
+            <Dependent Role="individualPurchases">
+              <PropertyRef Name="purchaseDesc_descId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="individualExpenses_tripLookUp">
+          <End Role="tripLookUp" Type="Self.tripLookUp" Multiplicity="1" />
+          <End Role="individualPurchases" Type="Self.individualPurchases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tripLookUp">
+              <PropertyRef Name="tripId" />
+            </Principal>
+            <Dependent Role="individualPurchases">
+              <PropertyRef Name="tripLookUp_tripId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="purchaseExpenses_personId">
+          <End Role="personId" Type="Self.personId" Multiplicity="1" />
+          <End Role="purchaseExpenses" Type="Self.purchaseExpenses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personId">
+              <PropertyRef Name="personId" />
+            </Principal>
+            <Dependent Role="purchaseExpenses">
+              <PropertyRef Name="personId_personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="purchaseExpenses_purchaseDesc">
+          <End Role="purchaseDesc" Type="Self.purchaseDesc" Multiplicity="1" />
+          <End Role="purchaseExpenses" Type="Self.purchaseExpenses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="purchaseDesc">
+              <PropertyRef Name="descId" />
+            </Principal>
+            <Dependent Role="purchaseExpenses">
+              <PropertyRef Name="purchaseDesc_descId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="purchaseExpenses_tripLookUp">
+          <End Role="tripLookUp" Type="Self.tripLookUp" Multiplicity="1" />
+          <End Role="purchaseExpenses" Type="Self.purchaseExpenses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tripLookUp">
+              <PropertyRef Name="tripId" />
+            </Principal>
+            <Dependent Role="purchaseExpenses">
+              <PropertyRef Name="tripLookUp_tripId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TripAdvance_personId">
+          <End Role="personId" Type="Self.personId" Multiplicity="1" />
+          <End Role="TripAdvance" Type="Self.TripAdvance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personId">
+              <PropertyRef Name="personId" />
+            </Principal>
+            <Dependent Role="TripAdvance">
+              <PropertyRef Name="personId_personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TripAdvance_tripLookUp">
+          <End Role="tripLookUp" Type="Self.tripLookUp" Multiplicity="1" />
+          <End Role="TripAdvance" Type="Self.TripAdvance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tripLookUp">
+              <PropertyRef Name="tripId" />
+            </Principal>
+            <Dependent Role="TripAdvance">
+              <PropertyRef Name="tripLookUp_tripId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tripGroup_personId">
+          <End Role="personId" Type="Self.personId" Multiplicity="1" />
+          <End Role="tripGroup" Type="Self.tripGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personId">
+              <PropertyRef Name="personId" />
+            </Principal>
+            <Dependent Role="tripGroup">
+              <PropertyRef Name="personId_personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tripGroup_tripLookUp">
+          <End Role="tripLookUp" Type="Self.tripLookUp" Multiplicity="1" />
+          <End Role="tripGroup" Type="Self.tripGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tripLookUp">
+              <PropertyRef Name="tripId" />
+            </Principal>
+            <Dependent Role="tripGroup">
+              <PropertyRef Name="tripLookUp_tripId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="sp_GetPurchaseDesc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_GetPurchaseExpenses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_GetTripGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="trip_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_GetTripMembers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tripId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_GetTripName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_InsertIndividualExpense" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="purchaseDesc" Type="nvarchar" Mode="In" />
+          <Parameter Name="tripId" Type="int" Mode="In" />
+          <Parameter Name="personId" Type="int" Mode="In" />
+          <Parameter Name="purchaseId" Type="int" Mode="In" />
+          <Parameter Name="purchaseDescMisc" Type="nvarchar" Mode="In" />
+          <Parameter Name="transactionId" Type="nvarchar" Mode="In" />
+          <Parameter Name="amount" Type="float" Mode="In" />
+        </Function>
+        <Function Name="sp_InsertPurchaseExpenses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="ExpensoModelStoreContainer">
+          <EntitySet Name="individualPurchases" EntityType="Self.individualPurchases" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="personId" EntityType="Self.personId" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="purchaseDesc" EntityType="Self.purchaseDesc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="purchaseExpenses" EntityType="Self.purchaseExpenses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TripAdvance" EntityType="Self.TripAdvance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tripGroup" EntityType="Self.tripGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tripLookUp" EntityType="Self.tripLookUp" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="individualExpenses_personId" Association="Self.individualExpenses_personId">
+            <End Role="personId" EntitySet="personId" />
+            <End Role="individualPurchases" EntitySet="individualPurchases" />
+          </AssociationSet>
+          <AssociationSet Name="individualExpenses_purchaseDesc" Association="Self.individualExpenses_purchaseDesc">
+            <End Role="purchaseDesc" EntitySet="purchaseDesc" />
+            <End Role="individualPurchases" EntitySet="individualPurchases" />
+          </AssociationSet>
+          <AssociationSet Name="individualExpenses_tripLookUp" Association="Self.individualExpenses_tripLookUp">
+            <End Role="tripLookUp" EntitySet="tripLookUp" />
+            <End Role="individualPurchases" EntitySet="individualPurchases" />
+          </AssociationSet>
+          <AssociationSet Name="purchaseExpenses_personId" Association="Self.purchaseExpenses_personId">
+            <End Role="personId" EntitySet="personId" />
+            <End Role="purchaseExpenses" EntitySet="purchaseExpenses" />
+          </AssociationSet>
+          <AssociationSet Name="purchaseExpenses_purchaseDesc" Association="Self.purchaseExpenses_purchaseDesc">
+            <End Role="purchaseDesc" EntitySet="purchaseDesc" />
+            <End Role="purchaseExpenses" EntitySet="purchaseExpenses" />
+          </AssociationSet>
+          <AssociationSet Name="purchaseExpenses_tripLookUp" Association="Self.purchaseExpenses_tripLookUp">
+            <End Role="tripLookUp" EntitySet="tripLookUp" />
+            <End Role="purchaseExpenses" EntitySet="purchaseExpenses" />
+          </AssociationSet>
+          <AssociationSet Name="TripAdvance_personId" Association="Self.TripAdvance_personId">
+            <End Role="personId" EntitySet="personId" />
+            <End Role="TripAdvance" EntitySet="TripAdvance" />
+          </AssociationSet>
+          <AssociationSet Name="TripAdvance_tripLookUp" Association="Self.TripAdvance_tripLookUp">
+            <End Role="tripLookUp" EntitySet="tripLookUp" />
+            <End Role="TripAdvance" EntitySet="TripAdvance" />
+          </AssociationSet>
+          <AssociationSet Name="tripGroup_personId" Association="Self.tripGroup_personId">
+            <End Role="personId" EntitySet="personId" />
+            <End Role="tripGroup" EntitySet="tripGroup" />
+          </AssociationSet>
+          <AssociationSet Name="tripGroup_tripLookUp" Association="Self.tripGroup_tripLookUp">
+            <End Role="tripLookUp" EntitySet="tripLookUp" />
+            <End Role="tripGroup" EntitySet="tripGroup" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ExpensoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="individualPurchas">
+          <Key>
+            <PropertyRef Name="iPurchasesId" />
+          </Key>
+          <Property Name="iPurchasesId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="purschaseDesc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="tripLookUp_tripId" Type="Int32" Nullable="false" />
+          <Property Name="personId_personId" Type="Int32" Nullable="false" />
+          <Property Name="purchaseDesc_descId" Type="Int32" Nullable="false" />
+          <Property Name="purchaseDescMisc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="transactionId" Type="String" MaxLength="35" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="amount" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="personId" Relationship="Self.individualExpenses_personId" FromRole="individualPurchases" ToRole="personId" />
+          <NavigationProperty Name="purchaseDesc" Relationship="Self.individualExpenses_purchaseDesc" FromRole="individualPurchases" ToRole="purchaseDesc" />
+          <NavigationProperty Name="tripLookUp" Relationship="Self.individualExpenses_tripLookUp" FromRole="individualPurchases" ToRole="tripLookUp" />
+        </EntityType>
+        <EntityType Name="personId">
+          <Key>
+            <PropertyRef Name="personId1" />
+          </Key>
+          <Property Name="personId1" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="lastName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="emailId" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="phoneNumber" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="individualPurchases" Relationship="Self.individualExpenses_personId" FromRole="personId" ToRole="individualPurchases" />
+          <NavigationProperty Name="purchaseExpenses" Relationship="Self.purchaseExpenses_personId" FromRole="personId" ToRole="purchaseExpenses" />
+          <NavigationProperty Name="TripAdvances" Relationship="Self.TripAdvance_personId" FromRole="personId" ToRole="TripAdvance" />
+          <NavigationProperty Name="tripGroups" Relationship="Self.tripGroup_personId" FromRole="personId" ToRole="tripGroup" />
+        </EntityType>
+        <EntityType Name="purchaseDesc">
+          <Key>
+            <PropertyRef Name="descId" />
+          </Key>
+          <Property Name="descId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="purchaseDesc1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="individualPurchases" Relationship="Self.individualExpenses_purchaseDesc" FromRole="purchaseDesc" ToRole="individualPurchases" />
+          <NavigationProperty Name="purchaseExpenses" Relationship="Self.purchaseExpenses_purchaseDesc" FromRole="purchaseDesc" ToRole="purchaseExpenses" />
+        </EntityType>
+        <EntityType Name="purchaseExpens">
+          <Key>
+            <PropertyRef Name="pExpenseId" />
+          </Key>
+          <Property Name="pExpenseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tripLookUp_tripId" Type="Int32" Nullable="false" />
+          <Property Name="personId_personId" Type="Int32" Nullable="false" />
+          <Property Name="purchaseDesc_descId" Type="Int32" Nullable="false" />
+          <Property Name="purchaseAmount" Type="Int32" Nullable="false" />
+          <Property Name="purcahsedesc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="enteredDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="transactionId" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="purchasedesc" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="personId" Relationship="Self.purchaseExpenses_personId" FromRole="purchaseExpenses" ToRole="personId" />
+          <NavigationProperty Name="purchaseDesc1" Relationship="Self.purchaseExpenses_purchaseDesc" FromRole="purchaseExpenses" ToRole="purchaseDesc" />
+          <NavigationProperty Name="tripLookUp" Relationship="Self.purchaseExpenses_tripLookUp" FromRole="purchaseExpenses" ToRole="tripLookUp" />
+        </EntityType>
+        <EntityType Name="TripAdvance">
+          <Key>
+            <PropertyRef Name="advanceId" />
+          </Key>
+          <Property Name="advanceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="purchaseDesc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="tripLookUp_tripId" Type="Int32" Nullable="false" />
+          <Property Name="personId_personId" Type="Int32" Nullable="false" />
+          <Property Name="TripAdvance_advanceId" Type="Int32" Nullable="false" />
+          <Property Name="enterdDate" Type="Int32" Nullable="false" />
+          <Property Name="advanceAmount" Type="Int32" Nullable="false" />
+          <Property Name="transactionId" Type="String" MaxLength="35" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="personId" Relationship="Self.TripAdvance_personId" FromRole="TripAdvance" ToRole="personId" />
+          <NavigationProperty Name="tripLookUp" Relationship="Self.TripAdvance_tripLookUp" FromRole="TripAdvance" ToRole="tripLookUp" />
+        </EntityType>
+        <EntityType Name="tripGroup">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tripLookUp_tripId" Type="Int32" Nullable="false" />
+          <Property Name="personId_personId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="personId" Relationship="Self.tripGroup_personId" FromRole="tripGroup" ToRole="personId" />
+          <NavigationProperty Name="tripLookUp" Relationship="Self.tripGroup_tripLookUp" FromRole="tripGroup" ToRole="tripLookUp" />
+        </EntityType>
+        <EntityType Name="tripLookUp">
+          <Key>
+            <PropertyRef Name="tripId" />
+          </Key>
+          <Property Name="tripId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tripDesc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="individualPurchases" Relationship="Self.individualExpenses_tripLookUp" FromRole="tripLookUp" ToRole="individualPurchases" />
+          <NavigationProperty Name="purchaseExpenses" Relationship="Self.purchaseExpenses_tripLookUp" FromRole="tripLookUp" ToRole="purchaseExpenses" />
+          <NavigationProperty Name="TripAdvances" Relationship="Self.TripAdvance_tripLookUp" FromRole="tripLookUp" ToRole="TripAdvance" />
+          <NavigationProperty Name="tripGroups" Relationship="Self.tripGroup_tripLookUp" FromRole="tripLookUp" ToRole="tripGroup" />
+        </EntityType>
+        <Association Name="individualExpenses_personId">
+          <End Role="personId" Type="Self.personId" Multiplicity="1" />
+          <End Role="individualPurchases" Type="Self.individualPurchas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personId">
+              <PropertyRef Name="personId1" />
+            </Principal>
+            <Dependent Role="individualPurchases">
+              <PropertyRef Name="personId_personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="individualExpenses_purchaseDesc">
+          <End Role="purchaseDesc" Type="Self.purchaseDesc" Multiplicity="1" />
+          <End Role="individualPurchases" Type="Self.individualPurchas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="purchaseDesc">
+              <PropertyRef Name="descId" />
+            </Principal>
+            <Dependent Role="individualPurchases">
+              <PropertyRef Name="purchaseDesc_descId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="individualExpenses_tripLookUp">
+          <End Role="tripLookUp" Type="Self.tripLookUp" Multiplicity="1" />
+          <End Role="individualPurchases" Type="Self.individualPurchas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tripLookUp">
+              <PropertyRef Name="tripId" />
+            </Principal>
+            <Dependent Role="individualPurchases">
+              <PropertyRef Name="tripLookUp_tripId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="purchaseExpenses_personId">
+          <End Role="personId" Type="Self.personId" Multiplicity="1" />
+          <End Role="purchaseExpenses" Type="Self.purchaseExpens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personId">
+              <PropertyRef Name="personId1" />
+            </Principal>
+            <Dependent Role="purchaseExpenses">
+              <PropertyRef Name="personId_personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TripAdvance_personId">
+          <End Role="personId" Type="Self.personId" Multiplicity="1" />
+          <End Role="TripAdvance" Type="Self.TripAdvance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personId">
+              <PropertyRef Name="personId1" />
+            </Principal>
+            <Dependent Role="TripAdvance">
+              <PropertyRef Name="personId_personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tripGroup_personId">
+          <End Role="personId" Type="Self.personId" Multiplicity="1" />
+          <End Role="tripGroup" Type="Self.tripGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personId">
+              <PropertyRef Name="personId1" />
+            </Principal>
+            <Dependent Role="tripGroup">
+              <PropertyRef Name="personId_personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="purchaseExpenses_purchaseDesc">
+          <End Role="purchaseDesc" Type="Self.purchaseDesc" Multiplicity="1" />
+          <End Role="purchaseExpenses" Type="Self.purchaseExpens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="purchaseDesc">
+              <PropertyRef Name="descId" />
+            </Principal>
+            <Dependent Role="purchaseExpenses">
+              <PropertyRef Name="purchaseDesc_descId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="purchaseExpenses_tripLookUp">
+          <End Role="tripLookUp" Type="Self.tripLookUp" Multiplicity="1" />
+          <End Role="purchaseExpenses" Type="Self.purchaseExpens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tripLookUp">
+              <PropertyRef Name="tripId" />
+            </Principal>
+            <Dependent Role="purchaseExpenses">
+              <PropertyRef Name="tripLookUp_tripId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TripAdvance_tripLookUp">
+          <End Role="tripLookUp" Type="Self.tripLookUp" Multiplicity="1" />
+          <End Role="TripAdvance" Type="Self.TripAdvance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tripLookUp">
+              <PropertyRef Name="tripId" />
+            </Principal>
+            <Dependent Role="TripAdvance">
+              <PropertyRef Name="tripLookUp_tripId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tripGroup_tripLookUp">
+          <End Role="tripLookUp" Type="Self.tripLookUp" Multiplicity="1" />
+          <End Role="tripGroup" Type="Self.tripGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tripLookUp">
+              <PropertyRef Name="tripId" />
+            </Principal>
+            <Dependent Role="tripGroup">
+              <PropertyRef Name="tripLookUp_tripId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ExpensoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="individualPurchases" EntityType="Self.individualPurchas" />
+          <EntitySet Name="personIds" EntityType="Self.personId" />
+          <EntitySet Name="purchaseDescs" EntityType="Self.purchaseDesc" />
+          <EntitySet Name="purchaseExpenses" EntityType="Self.purchaseExpens" />
+          <EntitySet Name="TripAdvances" EntityType="Self.TripAdvance" />
+          <EntitySet Name="tripGroups" EntityType="Self.tripGroup" />
+          <EntitySet Name="tripLookUps" EntityType="Self.tripLookUp" />
+          <AssociationSet Name="individualExpenses_personId" Association="Self.individualExpenses_personId">
+            <End Role="personId" EntitySet="personIds" />
+            <End Role="individualPurchases" EntitySet="individualPurchases" />
+          </AssociationSet>
+          <AssociationSet Name="individualExpenses_purchaseDesc" Association="Self.individualExpenses_purchaseDesc">
+            <End Role="purchaseDesc" EntitySet="purchaseDescs" />
+            <End Role="individualPurchases" EntitySet="individualPurchases" />
+          </AssociationSet>
+          <AssociationSet Name="individualExpenses_tripLookUp" Association="Self.individualExpenses_tripLookUp">
+            <End Role="tripLookUp" EntitySet="tripLookUps" />
+            <End Role="individualPurchases" EntitySet="individualPurchases" />
+          </AssociationSet>
+          <AssociationSet Name="purchaseExpenses_personId" Association="Self.purchaseExpenses_personId">
+            <End Role="personId" EntitySet="personIds" />
+            <End Role="purchaseExpenses" EntitySet="purchaseExpenses" />
+          </AssociationSet>
+          <AssociationSet Name="TripAdvance_personId" Association="Self.TripAdvance_personId">
+            <End Role="personId" EntitySet="personIds" />
+            <End Role="TripAdvance" EntitySet="TripAdvances" />
+          </AssociationSet>
+          <AssociationSet Name="tripGroup_personId" Association="Self.tripGroup_personId">
+            <End Role="personId" EntitySet="personIds" />
+            <End Role="tripGroup" EntitySet="tripGroups" />
+          </AssociationSet>
+          <AssociationSet Name="purchaseExpenses_purchaseDesc" Association="Self.purchaseExpenses_purchaseDesc">
+            <End Role="purchaseDesc" EntitySet="purchaseDescs" />
+            <End Role="purchaseExpenses" EntitySet="purchaseExpenses" />
+          </AssociationSet>
+          <AssociationSet Name="purchaseExpenses_tripLookUp" Association="Self.purchaseExpenses_tripLookUp">
+            <End Role="tripLookUp" EntitySet="tripLookUps" />
+            <End Role="purchaseExpenses" EntitySet="purchaseExpenses" />
+          </AssociationSet>
+          <AssociationSet Name="TripAdvance_tripLookUp" Association="Self.TripAdvance_tripLookUp">
+            <End Role="tripLookUp" EntitySet="tripLookUps" />
+            <End Role="TripAdvance" EntitySet="TripAdvances" />
+          </AssociationSet>
+          <AssociationSet Name="tripGroup_tripLookUp" Association="Self.tripGroup_tripLookUp">
+            <End Role="tripLookUp" EntitySet="tripLookUps" />
+            <End Role="tripGroup" EntitySet="tripGroups" />
+          </AssociationSet>
+          <FunctionImport Name="sp_GetPurchaseDesc" ReturnType="Collection(ExpensoModel.sp_GetPurchaseDesc_Result)" />
+          <FunctionImport Name="sp_GetTripGroup" ReturnType="Collection(ExpensoModel.sp_GetTripGroup_Result)">
+          <Parameter Name="trip_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetTripMembers" ReturnType="Collection(ExpensoModel.sp_GetTripMembers_Result)">
+          <Parameter Name="tripId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetTripName" ReturnType="Collection(ExpensoModel.sp_GetTripName_Result)" />
+          <FunctionImport Name="sp_InsertIndividualExpense">
+            <Parameter Name="purchaseDesc" Mode="In" Type="String" />
+            <Parameter Name="tripId" Mode="In" Type="Int32" />
+            <Parameter Name="personId" Mode="In" Type="Int32" />
+            <Parameter Name="purchaseId" Mode="In" Type="Int32" />
+            <Parameter Name="purchaseDescMisc" Mode="In" Type="String" />
+            <Parameter Name="transactionId" Mode="In" Type="String" />
+            <Parameter Name="amount" Mode="In" Type="Double" />
+          </FunctionImport>
+          <FunctionImport Name="sp_InsertPurchaseExpenses" />
+          <FunctionImport Name="sp_GetPurchaseExpenses" ReturnType="Collection(ExpensoModel.sp_GetPurchaseExpenses_Result)" />
+        </EntityContainer>
+        <ComplexType Name="sp_GetPurchaseDesc_Result">
+          <Property Type="Int32" Name="descId" Nullable="false" />
+          <Property Type="String" Name="purchaseDesc" Nullable="false" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="sp_GetTripGroup_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="tripLookUp_tripId" Nullable="false" />
+          <Property Type="Int32" Name="personId_personId" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_GetTripMembers_Result">
+          <Property Type="Int32" Name="personId" Nullable="false" />
+          <Property Type="String" Name="personName" Nullable="false" MaxLength="41" />
+        </ComplexType>
+        <ComplexType Name="sp_GetTripName_Result">
+          <Property Type="Int32" Name="tripId" Nullable="false" />
+          <Property Type="String" Name="tripDesc" Nullable="false" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="sp_GetPurchaseExpenses_Result">
+          <Property Type="Int32" Name="pExpenseId" Nullable="false" />
+          <Property Type="Int32" Name="tripLookUp_tripId" Nullable="false" />
+          <Property Type="Int32" Name="personId_personId" Nullable="false" />
+          <Property Type="Int32" Name="purchaseDesc_descId" Nullable="false" />
+          <Property Type="Int32" Name="purchaseAmount" Nullable="false" />
+          <Property Type="String" Name="purcahsedesc" Nullable="false" MaxLength="20" />
+          <Property Type="DateTime" Name="enteredDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="transactionId" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="purchasedesc" Nullable="true" MaxLength="20" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ExpensoModelStoreContainer" CdmEntityContainer="ExpensoEntities">
+          <EntitySetMapping Name="individualPurchases">
+            <EntityTypeMapping TypeName="ExpensoModel.individualPurchas">
+              <MappingFragment StoreEntitySet="individualPurchases">
+                <ScalarProperty Name="iPurchasesId" ColumnName="iPurchasesId" />
+                <ScalarProperty Name="purschaseDesc" ColumnName="purschaseDesc" />
+                <ScalarProperty Name="tripLookUp_tripId" ColumnName="tripLookUp_tripId" />
+                <ScalarProperty Name="personId_personId" ColumnName="personId_personId" />
+                <ScalarProperty Name="purchaseDesc_descId" ColumnName="purchaseDesc_descId" />
+                <ScalarProperty Name="purchaseDescMisc" ColumnName="purchaseDescMisc" />
+                <ScalarProperty Name="transactionId" ColumnName="transactionId" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="personIds">
+            <EntityTypeMapping TypeName="ExpensoModel.personId">
+              <MappingFragment StoreEntitySet="personId">
+                <ScalarProperty Name="personId1" ColumnName="personId" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="emailId" ColumnName="emailId" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="purchaseDescs">
+            <EntityTypeMapping TypeName="ExpensoModel.purchaseDesc">
+              <MappingFragment StoreEntitySet="purchaseDesc">
+                <ScalarProperty Name="descId" ColumnName="descId" />
+                <ScalarProperty Name="purchaseDesc1" ColumnName="purchaseDesc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="purchaseExpenses">
+            <EntityTypeMapping TypeName="ExpensoModel.purchaseExpens">
+              <MappingFragment StoreEntitySet="purchaseExpenses">
+                <ScalarProperty Name="pExpenseId" ColumnName="pExpenseId" />
+                <ScalarProperty Name="tripLookUp_tripId" ColumnName="tripLookUp_tripId" />
+                <ScalarProperty Name="personId_personId" ColumnName="personId_personId" />
+                <ScalarProperty Name="purchaseDesc_descId" ColumnName="purchaseDesc_descId" />
+                <ScalarProperty Name="purchaseAmount" ColumnName="purchaseAmount" />
+                <ScalarProperty Name="purcahsedesc" ColumnName="purcahsedesc" />
+                <ScalarProperty Name="enteredDate" ColumnName="enteredDate" />
+                <ScalarProperty Name="transactionId" ColumnName="transactionId" />
+                <ScalarProperty Name="purchasedesc" ColumnName="purchasedesc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TripAdvances">
+            <EntityTypeMapping TypeName="ExpensoModel.TripAdvance">
+              <MappingFragment StoreEntitySet="TripAdvance">
+                <ScalarProperty Name="advanceId" ColumnName="advanceId" />
+                <ScalarProperty Name="purchaseDesc" ColumnName="purchaseDesc" />
+                <ScalarProperty Name="tripLookUp_tripId" ColumnName="tripLookUp_tripId" />
+                <ScalarProperty Name="personId_personId" ColumnName="personId_personId" />
+                <ScalarProperty Name="TripAdvance_advanceId" ColumnName="TripAdvance_advanceId" />
+                <ScalarProperty Name="enterdDate" ColumnName="enterdDate" />
+                <ScalarProperty Name="advanceAmount" ColumnName="advanceAmount" />
+                <ScalarProperty Name="transactionId" ColumnName="transactionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tripGroups">
+            <EntityTypeMapping TypeName="ExpensoModel.tripGroup">
+              <MappingFragment StoreEntitySet="tripGroup">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tripLookUp_tripId" ColumnName="tripLookUp_tripId" />
+                <ScalarProperty Name="personId_personId" ColumnName="personId_personId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tripLookUps">
+            <EntityTypeMapping TypeName="ExpensoModel.tripLookUp">
+              <MappingFragment StoreEntitySet="tripLookUp">
+                <ScalarProperty Name="tripId" ColumnName="tripId" />
+                <ScalarProperty Name="tripDesc" ColumnName="tripDesc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetPurchaseDesc" FunctionName="ExpensoModel.Store.sp_GetPurchaseDesc">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ExpensoModel.sp_GetPurchaseDesc_Result">
+                <ScalarProperty Name="descId" ColumnName="descId" />
+                <ScalarProperty Name="purchaseDesc" ColumnName="purchaseDesc" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetTripGroup" FunctionName="ExpensoModel.Store.sp_GetTripGroup">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ExpensoModel.sp_GetTripGroup_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tripLookUp_tripId" ColumnName="tripLookUp_tripId" />
+                <ScalarProperty Name="personId_personId" ColumnName="personId_personId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetTripMembers" FunctionName="ExpensoModel.Store.sp_GetTripMembers">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ExpensoModel.sp_GetTripMembers_Result">
+                <ScalarProperty Name="personId" ColumnName="personId" />
+                <ScalarProperty Name="personName" ColumnName="personName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetTripName" FunctionName="ExpensoModel.Store.sp_GetTripName">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ExpensoModel.sp_GetTripName_Result">
+                <ScalarProperty Name="tripId" ColumnName="tripId" />
+                <ScalarProperty Name="tripDesc" ColumnName="tripDesc" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_InsertIndividualExpense" FunctionName="ExpensoModel.Store.sp_InsertIndividualExpense" />
+          <FunctionImportMapping FunctionImportName="sp_InsertPurchaseExpenses" FunctionName="ExpensoModel.Store.sp_InsertPurchaseExpenses" />
+          <FunctionImportMapping FunctionImportName="sp_GetPurchaseExpenses" FunctionName="ExpensoModel.Store.sp_GetPurchaseExpenses">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ExpensoModel.sp_GetPurchaseExpenses_Result">
+                <ScalarProperty Name="pExpenseId" ColumnName="pExpenseId" />
+                <ScalarProperty Name="tripLookUp_tripId" ColumnName="tripLookUp_tripId" />
+                <ScalarProperty Name="personId_personId" ColumnName="personId_personId" />
+                <ScalarProperty Name="purchaseDesc_descId" ColumnName="purchaseDesc_descId" />
+                <ScalarProperty Name="purchaseAmount" ColumnName="purchaseAmount" />
+                <ScalarProperty Name="purcahsedesc" ColumnName="purcahsedesc" />
+                <ScalarProperty Name="enteredDate" ColumnName="enteredDate" />
+                <ScalarProperty Name="transactionId" ColumnName="transactionId" />
+                <ScalarProperty Name="purchasedesc" ColumnName="purchasedesc" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

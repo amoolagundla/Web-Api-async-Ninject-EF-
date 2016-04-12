@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ExpensoModelStoreContainer" CdmEntityContainer="ExpensoEntities">
+    <EntitySetMapping Name="individualPurchases">
+      <EntityTypeMapping TypeName="ExpensoModel.individualPurchas">
+        <MappingFragment StoreEntitySet="individualPurchases">
+          <ScalarProperty Name="iPurchasesId" ColumnName="iPurchasesId" />
+          <ScalarProperty Name="purschaseDesc" ColumnName="purschaseDesc" />
+          <ScalarProperty Name="tripLookUp_tripId" ColumnName="tripLookUp_tripId" />
+          <ScalarProperty Name="personId_personId" ColumnName="personId_personId" />
+          <ScalarProperty Name="purchaseDesc_descId" ColumnName="purchaseDesc_descId" />
+          <ScalarProperty Name="purchaseDescMisc" ColumnName="purchaseDescMisc" />
+          <ScalarProperty Name="transactionId" ColumnName="transactionId" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="personIds">
+      <EntityTypeMapping TypeName="ExpensoModel.personId">
+        <MappingFragment StoreEntitySet="personId">
+          <ScalarProperty Name="personId1" ColumnName="personId" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="emailId" ColumnName="emailId" />
+          <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="purchaseDescs">
+      <EntityTypeMapping TypeName="ExpensoModel.purchaseDesc">
+        <MappingFragment StoreEntitySet="purchaseDesc">
+          <ScalarProperty Name="descId" ColumnName="descId" />
+          <ScalarProperty Name="purchaseDesc1" ColumnName="purchaseDesc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="purchaseExpenses">
+      <EntityTypeMapping TypeName="ExpensoModel.purchaseExpens">
+        <MappingFragment StoreEntitySet="purchaseExpenses">
+          <ScalarProperty Name="pExpenseId" ColumnName="pExpenseId" />
+          <ScalarProperty Name="tripLookUp_tripId" ColumnName="tripLookUp_tripId" />
+          <ScalarProperty Name="personId_personId" ColumnName="personId_personId" />
+          <ScalarProperty Name="purchaseDesc_descId" ColumnName="purchaseDesc_descId" />
+          <ScalarProperty Name="purchaseAmount" ColumnName="purchaseAmount" />
+          <ScalarProperty Name="purcahsedesc" ColumnName="purcahsedesc" />
+          <ScalarProperty Name="enteredDate" ColumnName="enteredDate" />
+          <ScalarProperty Name="transactionId" ColumnName="transactionId" />
+          <ScalarProperty Name="purchasedesc" ColumnName="purchasedesc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TripAdvances">
+      <EntityTypeMapping TypeName="ExpensoModel.TripAdvance">
+        <MappingFragment StoreEntitySet="TripAdvance">
+          <ScalarProperty Name="advanceId" ColumnName="advanceId" />
+          <ScalarProperty Name="purchaseDesc" ColumnName="purchaseDesc" />
+          <ScalarProperty Name="tripLookUp_tripId" ColumnName="tripLookUp_tripId" />
+          <ScalarProperty Name="personId_personId" ColumnName="personId_personId" />
+          <ScalarProperty Name="TripAdvance_advanceId" ColumnName="TripAdvance_advanceId" />
+          <ScalarProperty Name="enterdDate" ColumnName="enterdDate" />
+          <ScalarProperty Name="advanceAmount" ColumnName="advanceAmount" />
+          <ScalarProperty Name="transactionId" ColumnName="transactionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tripGroups">
+      <EntityTypeMapping TypeName="ExpensoModel.tripGroup">
+        <MappingFragment StoreEntitySet="tripGroup">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="tripLookUp_tripId" ColumnName="tripLookUp_tripId" />
+          <ScalarProperty Name="personId_personId" ColumnName="personId_personId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tripLookUps">
+      <EntityTypeMapping TypeName="ExpensoModel.tripLookUp">
+        <MappingFragment StoreEntitySet="tripLookUp">
+          <ScalarProperty Name="tripId" ColumnName="tripId" />
+          <ScalarProperty Name="tripDesc" ColumnName="tripDesc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetPurchaseDesc" FunctionName="ExpensoModel.Store.sp_GetPurchaseDesc">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ExpensoModel.sp_GetPurchaseDesc_Result">
+          <ScalarProperty Name="descId" ColumnName="descId" />
+          <ScalarProperty Name="purchaseDesc" ColumnName="purchaseDesc" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetTripGroup" FunctionName="ExpensoModel.Store.sp_GetTripGroup">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ExpensoModel.sp_GetTripGroup_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="tripLookUp_tripId" ColumnName="tripLookUp_tripId" />
+          <ScalarProperty Name="personId_personId" ColumnName="personId_personId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetTripMembers" FunctionName="ExpensoModel.Store.sp_GetTripMembers">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ExpensoModel.sp_GetTripMembers_Result">
+          <ScalarProperty Name="personId" ColumnName="personId" />
+          <ScalarProperty Name="personName" ColumnName="personName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetTripName" FunctionName="ExpensoModel.Store.sp_GetTripName">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ExpensoModel.sp_GetTripName_Result">
+          <ScalarProperty Name="tripId" ColumnName="tripId" />
+          <ScalarProperty Name="tripDesc" ColumnName="tripDesc" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_InsertIndividualExpense" FunctionName="ExpensoModel.Store.sp_InsertIndividualExpense" />
+    <FunctionImportMapping FunctionImportName="sp_InsertPurchaseExpenses" FunctionName="ExpensoModel.Store.sp_InsertPurchaseExpenses" />
+    <FunctionImportMapping FunctionImportName="sp_GetPurchaseExpenses" FunctionName="ExpensoModel.Store.sp_GetPurchaseExpenses">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ExpensoModel.sp_GetPurchaseExpenses_Result">
+          <ScalarProperty Name="pExpenseId" ColumnName="pExpenseId" />
+          <ScalarProperty Name="tripLookUp_tripId" ColumnName="tripLookUp_tripId" />
+          <ScalarProperty Name="personId_personId" ColumnName="personId_personId" />
+          <ScalarProperty Name="purchaseDesc_descId" ColumnName="purchaseDesc_descId" />
+          <ScalarProperty Name="purchaseAmount" ColumnName="purchaseAmount" />
+          <ScalarProperty Name="purcahsedesc" ColumnName="purcahsedesc" />
+          <ScalarProperty Name="enteredDate" ColumnName="enteredDate" />
+          <ScalarProperty Name="transactionId" ColumnName="transactionId" />
+          <ScalarProperty Name="purchasedesc" ColumnName="purchasedesc" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

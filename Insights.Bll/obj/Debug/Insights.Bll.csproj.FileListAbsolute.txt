@@ -1,0 +1,11 @@
+c:\Users\abhinav\documents\visual studio 2015\Projects\Insights\Insights.Bll\bin\Debug\Insights.Bll.dll
+c:\Users\abhinav\documents\visual studio 2015\Projects\Insights\Insights.Bll\bin\Debug\Insights.Bll.pdb
+c:\Users\abhinav\documents\visual studio 2015\Projects\Insights\Insights.Bll\obj\Debug\Insights.Bll.csprojResolveAssemblyReference.cache
+c:\Users\abhinav\documents\visual studio 2015\Projects\Insights\Insights.Bll\obj\Debug\Insights.Bll.dll
+c:\Users\abhinav\documents\visual studio 2015\Projects\Insights\Insights.Bll\obj\Debug\Insights.Bll.pdb
+c:\Users\abhinav\Documents\Visual Studio 2015\Projects\Insights\Insights.Bll\bin\Debug\EntityFramework.dll
+c:\Users\abhinav\Documents\Visual Studio 2015\Projects\Insights\Insights.Bll\bin\Debug\EntityFramework.xml
+c:\Users\abhinav\Documents\Visual Studio 2015\Projects\Insights\Insights.Bll\bin\Debug\AutoMapper.dll
+c:\Users\abhinav\Documents\Visual Studio 2015\Projects\Insights\Insights.Bll\bin\Debug\AutoMapper.xml
+c:\Users\abhinav\Documents\Visual Studio 2015\Projects\Insights\Insights.Bll\bin\Debug\Insights.Dll.dll
+c:\Users\abhinav\Documents\Visual Studio 2015\Projects\Insights\Insights.Bll\bin\Debug\Insights.Dll.pdb
